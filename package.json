@@ -1,0 +1,21 @@
+{
+  "name": "vue-ssr-html-stream",
+  "version": "1.0.0",
+  "description": "Transform stream to simplify Vue SSR streaming",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vuejs/vue-ssr-html-stream.git"
+  },
+  "keywords": [
+    "vue",
+    "ssr",
+    "stream"
+  ],
+  "author": "Evan You",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vuejs/vue-ssr-html-stream/issues"
+  },
+  "homepage": "https://github.com/vuejs/vue-ssr-html-stream#readme"
+}
