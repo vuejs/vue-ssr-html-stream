@@ -1,4 +1,4 @@
-# vue-ssr-html-stream [![Build Status](https://circleci.com/gh/vuejs/vue-loader/tree/master.svg?style=shield)](https://circleci.com/gh/vuejs/vue-loader/tree/master)
+# vue-ssr-html-stream [![Build Status](https://circleci.com/gh/vuejs/vue-ssr-html-stream/tree/master.svg?style=shield)](https://circleci.com/gh/vuejs/vue-ssr-html-stream/tree/master)
 
 > Transform stream to simplify Vue SSR streaming
 
