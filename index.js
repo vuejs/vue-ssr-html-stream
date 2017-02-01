@@ -5,8 +5,9 @@ class HTMLStream extends Transform {
   constructor (options) {
     super()
     this.started = false
-    const template = parseTemplate(options.template)
+    const template = parseTemplate(options.template, options.contentMarker || '<!-- APP -->')
     this.head = template.head
+    this.neck = template.neck
     this.tail = template.tail
     this.context = options.context || {}
   }
@@ -43,12 +44,11 @@ class HTMLStream extends Transform {
   }
 }
 
-function parseTemplate (template) {
+function parseTemplate (template, contentMarker) {
   if (typeof template === 'object') {
     return template
   }
-  const contentMarker = '<!-- APP -->'
-  const i = template.indexOf('</head>')
+  let i = template.indexOf('</head>')
   const j = template.indexOf(contentMarker)
   if (i < 0) {
     i = template.indexOf('<body>')
