@@ -9,7 +9,8 @@ const HTMLStream = require('vue-ssr-html-stream')
 
 const htmlStream = new HTMLStream({
   template, // string
-  context // ?Object
+  context, // ?Object
+  contentPlaceholder // ?string, defaults to <!-- APP -->
 })
 
 // pipe it
@@ -18,7 +19,7 @@ renderStream
   .pipe(responseStream)
 ```
 
-- The `template` option is a string of the HTML page template. It must contain the exact string `<!-- APP -->` which serves as the outlet for your app's server-rendered markup.
+- The `template` option is a string of the HTML page template. It must contain a special string which serves as the placeholder for your app's server-rendered content. The default placeholder string is `<!-- APP -->` - you can configure it with the `contentPlaceholder` option.
 
 - The `context` option should be the same context object passed to `bundleRenderer.renderToStream()`. The transform will check for a few special properties on the context when the source render stream starts emitting data:
 

@@ -5,7 +5,7 @@ class HTMLStream extends Transform {
   constructor (options) {
     super()
     this.started = false
-    const template = parseTemplate(options.template, options.contentMarker || '<!-- APP -->')
+    const template = parseTemplate(options.template, options.contentPlaceholder)
     this.head = template.head
     this.neck = template.neck
     this.tail = template.tail
@@ -44,22 +44,29 @@ class HTMLStream extends Transform {
   }
 }
 
-function parseTemplate (template, contentMarker) {
+function parseTemplate (template, contentPlaceholder = '<!-- APP -->') {
   if (typeof template === 'object') {
     return template
   }
+
   let i = template.indexOf('</head>')
-  const j = template.indexOf(contentMarker)
+  const j = template.indexOf(contentPlaceholder)
+
+  if (j < 0) {
+    throw new Error(`Content placeholder not found in template.`)
+  }
+
   if (i < 0) {
     i = template.indexOf('<body>')
     if (i < 0) {
       i = j
     }
   }
+
   return {
     head: template.slice(0, i),
     neck: template.slice(i, j),
-    tail: template.slice(j + contentMarker.length)
+    tail: template.slice(j + contentPlaceholder.length)
   }
 }
 
