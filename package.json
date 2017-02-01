@@ -12,6 +12,9 @@
     "ssr",
     "stream"
   ],
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "author": "Evan You",
   "license": "MIT",
   "bugs": {
