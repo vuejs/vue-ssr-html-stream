@@ -10,6 +10,7 @@ class HTMLStream extends Transform {
     this.neck = template.neck
     this.tail = template.tail
     this.context = options.context || {}
+    this.styleMode = options.styleMode == null || options.styleMode
   }
 
   _transform (data, encoding, done) {
@@ -22,7 +23,7 @@ class HTMLStream extends Transform {
         this.push(this.context.head)
       }
       // inline server-rendered CSS collected by vue-style-loader
-      if (this.context.styles) {
+      if (this.styleMode && this.context.styles) {
         this.push(this.context.styles)
       }
       this.push(this.neck)
@@ -38,6 +39,9 @@ class HTMLStream extends Transform {
       this.push(`<script>window.__INITIAL_STATE__=${
         serialize(this.context.state, { isJSON: true })
       }</script>`)
+    }
+    if (!this.styleMode && this.context.styles) {
+      this.push(this.context.styles)
     }
     this.push(this.tail)
     done()
