@@ -1,6 +1,6 @@
 # vue-ssr-html-stream [![Build Status](https://circleci.com/gh/vuejs/vue-ssr-html-stream/tree/master.svg?style=shield)](https://circleci.com/gh/vuejs/vue-ssr-html-stream/tree/master)
 
-> Transform stream to simplify Vue SSR streaming
+> **Note:** this package is used internally by vue-server-renderer >= 2.2.0 via the `template` option.
 
 ## Usage
 
@@ -10,7 +10,7 @@ const HTMLStream = require('vue-ssr-html-stream')
 const htmlStream = new HTMLStream({
   template, // string
   context, // ?Object
-  contentPlaceholder // ?string, defaults to <!-- APP -->
+  outletPlaceholder // ?string, defaults to <!--vue-ssr-outlet-->
 })
 
 // pipe it
@@ -19,7 +19,7 @@ renderStream
   .pipe(responseStream)
 ```
 
-- The `template` option is a string of the HTML page template. It must contain a special string which serves as the placeholder for your app's server-rendered content. The default placeholder string is `<!-- APP -->` - you can configure it with the `contentPlaceholder` option.
+- The `template` option is a string of the HTML page template. It must contain a special string which serves as the placeholder for your app's server-rendered content. The default placeholder string is `<!--vue-ssr-outlet-->` - you can configure it with the `outletPlaceholder` option.
 
 - The `context` option should be the same context object passed to `bundleRenderer.renderToStream()`. The transform will check for a few special properties on the context when the source render stream starts emitting data:
 
