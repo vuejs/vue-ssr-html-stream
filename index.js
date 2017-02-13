@@ -35,9 +35,7 @@ class HTMLStream extends Transform {
     this.emit('beforeEnd')
     // inline initial store state
     if (this.context.state) {
-      this.push(`<script>window.__INITIAL_STATE__=${
-        serialize(this.context.state, { isJSON: true })
-      }</script>`)
+      this.push(renderState(this.context.state))
     }
     this.push(this.tail)
     done()
@@ -70,6 +68,25 @@ function parseTemplate (template, contentPlaceholder = '<!--vue-ssr-outlet-->') 
   }
 }
 
+function renderTemplate (parsedTemplate, content, context = {}) {
+  return (
+    parsedTemplate.head +
+    (context.head || '') +
+    (context.styles || '') +
+    parsedTemplate.neck +
+    content +
+    (context.state ? renderState(context.state) : '') +
+    parsedTemplate.tail
+  )
+}
+
+function renderState (state) {
+  return `<script>window.__INITIAL_STATE__=${
+    serialize(state, { isJSON: true })
+  }</script>`
+}
+
 HTMLStream.parseTemplate = parseTemplate
+HTMLStream.renderTemplate = renderTemplate
 
 module.exports = HTMLStream
