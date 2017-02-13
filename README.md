@@ -36,7 +36,7 @@ The stream emits a special event: `beforeStart`. An example use case would be ge
 ``` js
 htmlStream.on('beforeStart', () => {
   const meta = context.meta.inject()
-  context.head = meta.title.text()
+  context.head = (context.head || '') + meta.title.text()
 })
 ```
 
