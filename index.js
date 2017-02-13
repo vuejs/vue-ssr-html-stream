@@ -5,7 +5,7 @@ class HTMLStream extends Transform {
   constructor (options) {
     super()
     this.started = false
-    const template = parseTemplate(options.template, options.contentPlaceholder)
+    const template = parseTemplate(options.template, options.outletPlaceholder)
     this.head = template.head
     this.neck = template.neck
     this.tail = template.tail
@@ -44,7 +44,7 @@ class HTMLStream extends Transform {
   }
 }
 
-function parseTemplate (template, contentPlaceholder = '<!-- APP -->') {
+function parseTemplate (template, contentPlaceholder = '<!--vue-ssr-outlet-->') {
   if (typeof template === 'object') {
     return template
   }
@@ -69,5 +69,7 @@ function parseTemplate (template, contentPlaceholder = '<!-- APP -->') {
     tail: template.slice(j + contentPlaceholder.length)
   }
 }
+
+HTMLStream.parseTemplate = parseTemplate
 
 module.exports = HTMLStream
