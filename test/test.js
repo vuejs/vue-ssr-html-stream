@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const HTMLStream = require('../index')
+const HTMLStream = require('../')
 const template = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf-8')
 const source = fs.readFileSync(path.join(__dirname, 'fixture.html'), 'utf-8')
 const sourceStream = fs.createReadStream(path.join(__dirname, 'fixture.html'), 'utf-8')
