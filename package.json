@@ -16,8 +16,10 @@
     "node": ">=4.0.0"
   },
   "scripts": {
-    "test": "npm run prepublish && jest --env node",
-    "prepublish": "buble index.js > index.es5.js"
+    "test": "jest --env node",
+    "build": "buble index.js > index.es5.js",
+    "pretest": "npm run build",
+    "prepublish": "npm run build"
   },
   "author": "Evan You",
   "license": "MIT",
