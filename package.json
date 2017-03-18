@@ -1,6 +1,6 @@
 {
   "name": "vue-ssr-html-stream",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Transform stream to simplify Vue SSR streaming",
   "main": "index.es5.js",
   "repository": {
