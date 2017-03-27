@@ -29,6 +29,8 @@ renderStream
 
   - `context.state`: initial Vuex store state that should be inlined in the page as `window.__INITIAL_STATE__`. The inlined JSON is automatically sanitized with [serialize-javascript](https://github.com/yahoo/serialize-javascript).
 
+  - `context.asyncChunks`: `<script>` tags for async chunks (from webpack's code split) that need to be embedded **after webpack bootstrap** and **before app entry**. This requires [using `CommonsChunkPlugin` to split out webpack runtime and manifest into a separate file](https://webpack.js.org/guides/code-splitting-libraries/#manifest-file).
+
 ### `beforeStart` event
 
 The stream emits a special event: `beforeStart`. An example use case would be generating `context.head` using info injected by [vue-meta](https://github.com/declandewet/vue-meta):
