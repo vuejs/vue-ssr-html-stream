@@ -8,6 +8,7 @@ class HTMLStream extends Transform {
     const template = parseTemplate(options.template, options.outletPlaceholder)
     this.head = template.head
     this.neck = template.neck
+    this.waist = template.waist
     this.tail = template.tail
     this.context = options.context || {}
   }
@@ -37,6 +38,10 @@ class HTMLStream extends Transform {
     if (this.context.state) {
       this.push(renderState(this.context.state))
     }
+    this.push(this.waist)
+    if (this.context.asyncChunks) {
+      this.push(this.context.asyncChunks)
+    }
     this.push(this.tail)
     done()
   }
@@ -61,10 +66,20 @@ function parseTemplate (template, contentPlaceholder = '<!--vue-ssr-outlet-->') 
     }
   }
 
+  let waist = ''
+  let tail = template.slice(j + contentPlaceholder.length)
+  let k = tail.indexOf('</script>')
+  if (k > 0) {
+    k += '</script>'.length
+    waist = tail.slice(0, k)
+    tail = tail.slice(k)
+  }
+
   return {
     head: template.slice(0, i),
     neck: template.slice(i, j),
-    tail: template.slice(j + contentPlaceholder.length)
+    waist,
+    tail
   }
 }
 
@@ -76,6 +91,8 @@ function renderTemplate (parsedTemplate, content, context = {}) {
     parsedTemplate.neck +
     content +
     (context.state ? renderState(context.state) : '') +
+    parsedTemplate.waist +
+    (context.asyncChunks ? context.asyncChunks : '') +
     parsedTemplate.tail
   )
 }
