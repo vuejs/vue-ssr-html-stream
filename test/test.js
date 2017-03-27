@@ -11,7 +11,8 @@ test('should work', done => {
     styles: '<style>h1 { color: red }</style>',
     state: {
       haxorXSS: '</script>'
-    }
+    },
+    asyncChunks: `<script src="foo.js"></script>`
   }
 
   const htmlStream = new HTMLStream({
@@ -30,6 +31,11 @@ test('should work', done => {
       expect(output.indexOf(context.head)).toBeGreaterThan(-1)
       expect(output.indexOf(source)).toBeGreaterThan(-1)
       expect(output.indexOf('{"haxorXSS":"\\u003C\\u002Fscript\\u003E"}')).toBeGreaterThan(-1)
+      expect(output.indexOf(
+        `<script src="manifest.js"></script>` +
+        `<script src="foo.js"></script>` +
+        `<script src="app.js"></script>`
+      )).toBeGreaterThan(-1)
       done()
     })
 })
