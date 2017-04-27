@@ -1,6 +1,6 @@
-# vue-ssr-html-stream [![Build Status](https://circleci.com/gh/vuejs/vue-ssr-html-stream/tree/master.svg?style=shield)](https://circleci.com/gh/vuejs/vue-ssr-html-stream/tree/master)
+> **DEPRECATED**: This package has been pulled into `vue-server-renderer`.
 
-> **Note:** this package is used internally by vue-server-renderer >= 2.2.0 via the `template` option.
+# vue-ssr-html-stream [![Build Status](https://circleci.com/gh/vuejs/vue-ssr-html-stream/tree/master.svg?style=shield)](https://circleci.com/gh/vuejs/vue-ssr-html-stream/tree/master)
 
 ## Usage
 
