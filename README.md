@@ -19,13 +19,13 @@ renderStream
   .pipe(responseStream)
 ```
 
-- The `template` option is a string of the HTML page template. It must contain a special string which serves as the placeholder for your app's server-rendered content. The default placeholder string is `<!--vue-ssr-outlet-->` - you can configure it with the `outletPlaceholder` option.
+- The `template` option is a string of the HTML page template. It must contain a special string which serves as the placeholder for your app's server-rendered content. The default placeholder for string is `<!--vue-ssr-outlet-->` - you can configure it with the `outletPlaceholder` option.
 
 - The `context` option should be the same context object passed to `bundleRenderer.renderToStream()`. The transform will check for a few special properties on the context when the source render stream starts emitting data:
 
   - `context.head`: any head markup that should be injected into the head of the page.
 
-  - `context.styles`: any inline CSS that should be injected into the head of the page. Note that `vue-loader` 10.2.0+ (which uses `vue-style-loader` 2.0) will automatically populate this property with styles used in rendered components.
+  - `context.styles`: any inline CSS that should be injected into the head of the page. Note that `vue-loader` 10.2.0+ (which uses `vue-style-loader` 2.0) will automatically populate this property with style used in rendered components.
 
   - `context.state`: initial Vuex store state that should be inlined in the page as `window.__INITIAL_STATE__`. The inlined JSON is automatically sanitized with [serialize-javascript](https://github.com/yahoo/serialize-javascript).
 
